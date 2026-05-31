@@ -1,0 +1,277 @@
+/* ── Sidebar shell ─────────────────────────────────────────── */
+.sidebar {
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 32px;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
+
+/* ── Empty / idle state ────────────────────────────────────── */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  gap: 14px;
+  color: rgba(255,255,255,0.35);
+}
+.empty p {
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+}
+
+/* ── Loading spinner ───────────────────────────────────────── */
+.spinnerWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  gap: 16px;
+}
+.hourglassWrap {
+  animation: spin 1s linear infinite;
+  display: flex;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loadingText {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+
+/* ── Error state ───────────────────────────────────────────── */
+.errorWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  gap: 14px;
+  padding: 32px 16px;
+  text-align: center;
+}
+.errorText {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
+
+/* ── Header card – word title + accent line ────────────────── */
+.headerCard {
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  margin-bottom: 20px;
+}
+.wordContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wordTitle {
+  font-size: 38px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 1.15;
+  margin: 0;
+}
+.accentLine {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+  margin-top: 14px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+}
+
+/* ── Entry card ────────────────────────────────────────────── */
+.entryCard {
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.08) 100%);
+  border: 1px solid rgba(99,102,241,0.15);
+  transition: all 0.3s ease;
+}
+
+.entryCard:hover {
+  border-color: rgba(99,102,241,0.3);
+  box-shadow: 0 4px 12px rgba(99,102,241,0.1);
+}
+
+/* ── Part-of-speech badge ──────────────────────────────────── */
+.posContainer {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.posBadge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+}
+.partOfSpeech {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* ── Forms chips ───────────────────────────────────────────── */
+.formsSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.formChip {
+  padding: 5px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.formText {
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+}
+.formTag {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  font-style: italic;
+}
+
+/* ── Sense card ────────────────────────────────────────────── */
+.senseCard {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-left: 3px solid #ffffff;
+}
+
+.definitionRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.definition {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Examples ──────────────────────────────────────────────── */
+.exampleBox {
+  background: rgba(42,31,31,0.6);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  margin-left: 20px;
+}
+.exampleText {
+  font-size: 13px;
+  color: #d0d0d0;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ── Arabic translation ────────────────────────────────────── */
+.translationBox {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.translationWord {
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 600;
+}
+.translationLang {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ── Synonyms card ─────────────────────────────────────────── */
+.synonymsCard {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 12px;
+}
+.sectionTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 12px;
+  letter-spacing: 0.4px;
+}
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.synonymTag {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 4px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.synonymTag:hover {
+  background: rgba(255,255,255,0.18);
+}
+.synonymText {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* ── No data ───────────────────────────────────────────────── */
+.noDataWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  gap: 14px;
+}
+.noDataText {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
