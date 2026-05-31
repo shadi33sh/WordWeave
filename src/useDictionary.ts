@@ -42,7 +42,7 @@ export function useDictionary() {
             : `API error ${res.status}`
         );
       }
-      const json: DictionaryResult[] = await res.json();
+      const json: DictionaryResult = await res.json();
       console.log(json)
       
       cache.current[word] = json; // Cache the first result for simplicity
