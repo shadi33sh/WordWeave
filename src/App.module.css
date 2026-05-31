@@ -57,6 +57,12 @@
   gap: 12px;
 }
 
+.modeButtonGroup {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .currentWord {
   font-size: 12.5px;
   color: rgba(255,255,255,0.4);
@@ -86,6 +92,12 @@
 
 .modeBtn:hover { opacity: 0.88; }
 .modeBtn:active { transform: scale(0.97); }
+
+.modeBtn.active {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
 
 /* ── Layout ──────────────────────────────────────────────── */
 .main {
