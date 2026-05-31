@@ -9,7 +9,6 @@
 }
 
 .uploadSection {
-  margin-bottom: 28px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -56,7 +55,6 @@
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   background: white;
-  margin-bottom: 20px;
 }
 
 .pdfCanvas {
@@ -75,33 +73,25 @@
   z-index: 10;
 }
 
+.textLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
 .textSpan {
   position: absolute;
-  white-space: nowrap;
   cursor: pointer;
-  color: transparent;
-  background-color: transparent;
-  border-radius: 2px;
-  transition: background-color 0.15s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  overflow: hidden;
-  text-overflow: clip;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+  white-space: nowrap;
+  color: transparent;        /* ← hides the duplicate text */
+  pointer-events: auto;
+  border-radius: 3px;
 }
 
-.textSpan:hover {
-  background-color: rgba(99, 102, 241, 0.25);
-  outline: 1px solid rgba(99, 102, 241, 0.5);
-}
-
-.textSpan.highlighted {
-  background-color: #6366f1 !important;
-  color: white;
-  font-weight: 700;
-  outline: 1px solid #5558e3;
+.textSpan:hover,
+.highlighted {               /* ← same style for both */
+  background-color: rgba(99, 102, 241, 0.35);
 }
 
 .emptyState {
@@ -123,7 +113,6 @@
 .hint {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.3);
-  font-style: italic;
 }
 
 @media (max-width: 768px) {

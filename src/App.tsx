@@ -25,7 +25,7 @@ export default function App() {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging) return;
       const newWidth = window.innerWidth - e.clientX;
-      if (newWidth >= 280 && newWidth <= 600) {
+      if (newWidth >= 280 && newWidth <= 400) {
         setSidebarWidth(newWidth);
       }
     };

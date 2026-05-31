@@ -58,11 +58,11 @@ export function PDFViewer({ onWordClick, selectedWord }: PDFViewerProps) {
       await page.render({
         canvasContext: context,
         viewport: viewport,
-      }).promise;
+      } as any).promise;
 
       // Add text layer for selection
       const textContent = await page.getTextContent();
-      renderTextLayer(canvas, textContent, page, viewport);
+      renderTextLayer(canvas, textContent, viewport);
     } catch (error) {
       console.error(`Error rendering page ${pageNum}:`, error);
     }
@@ -70,8 +70,7 @@ export function PDFViewer({ onWordClick, selectedWord }: PDFViewerProps) {
 
   const renderTextLayer = (
     canvas: HTMLCanvasElement,
-    textContent: pdfjsLib.TextContent,
-    page: pdfjsLib.PDFPageProxy,
+    textContent: any,
     viewport: pdfjsLib.PageViewport,
   ) => {
     const container = canvas.parentElement as HTMLDivElement;
@@ -124,8 +123,8 @@ export function PDFViewer({ onWordClick, selectedWord }: PDFViewerProps) {
         // span.style.width = (tokenWidth * scale) + 'px';
 
         // Keep everything else the same
-        span.style.left = x * scale + "px";
-        span.style.top = canvas.height - (y + itemHeight) * scale + "px";
+        span.style.left = x * scale - 4 + "px";
+        span.style.top = canvas.height - (y + itemHeight) * scale + 3 + "px";
         span.style.fontSize = itemHeight * scale + "px";
         span.style.height = itemHeight * scale + "px";
         span.style.fontFamily = "sans-serif";
@@ -178,31 +177,6 @@ export function PDFViewer({ onWordClick, selectedWord }: PDFViewerProps) {
 
   return (
     <div className={styles.pdfContainer}>
-      <div className={styles.uploadSection}>
-        <label htmlFor="pdf-input" className={styles.uploadLabel}>
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          <span>Upload PDF</span>
-        </label>
-        <input
-          id="pdf-input"
-          type="file"
-          accept=".pdf"
-          onChange={handleFileUpload}
-          className={styles.fileInput}
-        />
-      </div>
-
       {pdfDocument && (
         <div className={styles.pagesContainer}>
           {Array.from({ length: pages }).map((_, i) => (
@@ -230,11 +204,33 @@ export function PDFViewer({ onWordClick, selectedWord }: PDFViewerProps) {
           >
             <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
             <polyline points="13 2 13 9 20 9" />
-            <text x="8" y="18" fontSize="8" fill="currentColor">
-              PDF
-            </text>
+        
           </svg>
-          <p>Upload a PDF to get started</p>
+
+          <div className={styles.uploadSection}>
+            <label htmlFor="pdf-input" className={styles.uploadLabel}>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Upload PDF</span>
+            </label>
+            <input
+              id="pdf-input"
+              type="file"
+              accept=".pdf"
+              onChange={handleFileUpload}
+              className={styles.fileInput}
+            />
+          </div>
           <p className={styles.hint}>Click any word in the PDF to look it up</p>
         </div>
       )}
