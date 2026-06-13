@@ -6,8 +6,6 @@ interface HTMLViewerProps {
   selectedWord: string | null;
 }
 
-const CORS_PROXY = 'https://corsproxy.io/?';
-
 export function HTMLViewer({ onWordClick, selectedWord }: HTMLViewerProps) {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,14 +24,46 @@ export function HTMLViewer({ onWordClick, selectedWord }: HTMLViewerProps) {
     try {
       // Validate URL
       const urlObj = new URL(url.startsWith('http') ? url : `https://${url}`);
-      const proxyUrl = CORS_PROXY + encodeURIComponent(urlObj.toString());
+      
+      // Try multiple CORS proxies in order of preference
+      const proxies = [
+        (u: string) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+        (u: string) => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+      ];
 
-      const response = await fetch(proxyUrl);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+      let response;
+      let html;
+      let lastError: Error | null = null;
+
+      for (const proxyFactory of proxies) {
+        try {
+          const proxyUrl = proxyFactory(urlObj.toString());
+          response = await Promise.race([
+            fetch(proxyUrl),
+            new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('Request timeout')), 10000)
+            )
+          ]) as Response;
+
+          if (response.ok) {
+            html = await response.text();
+            break;
+          } else if (response.status === 413) {
+            lastError = new Error(`Proxy returned ${response.status}: Request too large`);
+            continue;
+          } else {
+            lastError = new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+            continue;
+          }
+        } catch (err) {
+          lastError = err instanceof Error ? err : new Error('Unknown error');
+          continue;
+        }
       }
 
-      let html = await response.text();
+      if (!html) {
+        throw lastError || new Error('Failed to fetch URL with all available proxies');
+      }
 
       // Extract main content - try common selectors
       const parser = new DOMParser();

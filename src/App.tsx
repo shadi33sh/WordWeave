@@ -51,11 +51,9 @@ export default function App() {
         <div className={styles.headerLeft}>
           <div className={styles.logo}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M8 12h8" />
+              <circle cx="12" cy="11" r="9" />
               <path d="M9 9l3-3 3 3" />
-              <path d="M9 15l3 3 3-3" />
-              <circle cx="12" cy="12" r="2" />
+              <path d="M9 13l3 3 3-3" />
             </svg>
           </div>
           <div>
@@ -91,14 +89,14 @@ export default function App() {
                 )}
               </button>
             )}
-            <button className={`${styles.modeBtn} ${viewMode === 'pdf' ? styles.active : ''}`} onClick={() => setViewMode(viewMode === 'pdf' ? 'text' : 'pdf')}>
+            <button className={`${styles.modeBtn} ${viewMode === 'pdf' ? styles.active : styles.active}`} onClick={() => setViewMode(viewMode === 'pdf' ? 'text' : 'pdf')}>
               <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
                 <polyline points="13 2 13 9 20 9" />
               </svg>
               {viewMode === 'pdf' ? 'Text Mode' : 'PDF'}
             </button>
-            <button className={`${styles.modeBtn} ${viewMode === 'html' ? styles.active : ''}`} onClick={() => setViewMode(viewMode === 'html' ? 'text' : 'html')}>
+            <button className={`${styles.modeBtn} ${viewMode === 'html' ? styles.active : styles.active}`} onClick={() => setViewMode(viewMode === 'html' ? 'text' : 'html')}>
               <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
